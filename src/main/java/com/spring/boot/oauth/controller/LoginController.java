@@ -1,27 +1,31 @@
 package com.spring.boot.oauth.controller;
 
+import com.spring.boot.oauth.exception.AccessNotAllowedException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-
 public class LoginController {
 
-    @GetMapping("/")
-    public String getHome()
+    @GetMapping("/user")
+    public ResponseEntity getUserHome()
     {
-       return "Hello Home" ;
+       return ResponseEntity.ok("Hello User Home") ;
     }
 
-    @GetMapping("/login")
-    public String getLoginHome()
+    @GetMapping("/admin")
+    public ResponseEntity getAdminHome()
     {
-        return "Welcome to Login Page" ;
+        return ResponseEntity.ok("Welcome to Admin Home Page" );
     }
 
-    @PostMapping("/login/{username}")
-    public String getLoginHome(@PathVariable String username)
+    @GetMapping("/view")
+    public ResponseEntity getErrorInfo()
     {
-        return "Welcome to Login Page"+username ;
+        throw  new AccessNotAllowedException("Not Allowed to access this page");
+
     }
+
+
 
 }
